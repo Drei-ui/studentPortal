@@ -4,7 +4,9 @@
     flex-direction: column;
     margin-top: 15rem;
     padding: 2%;
-    width: 400px;
+    width: 20vw;
+    height: 45vh;
+    border-radius: 10px;
 }
 
 .Header {
@@ -18,10 +20,30 @@ body{
     overflow: hidden;
 }
 
-input{
+.details{
     display: flex;
     flex-direction: column;
     gap: 10px;
     background: transparent;
-    color: #797979;
+    
+}
+
+input{
+    display: flex;
+    align-items: center;
+    background: #eaeaea;
+    
+}
+
+
+.buttons{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    margin-top: 30px;
+    
+}
+.buttons button{
+    width: 500px;
+    border-radius: 20px;
 }

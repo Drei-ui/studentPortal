@@ -18,7 +18,7 @@ function Create() {
 
         axios.post('/add_user', values)
             .then((res) => {
-                navigate('/');
+                navigate('/home');
                 console.log(res);
             })
             .catch((err) => console.log(err));
