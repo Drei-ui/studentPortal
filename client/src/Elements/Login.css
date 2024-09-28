@@ -1,0 +1,27 @@
+.container{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    margin-top: 15rem;
+    padding: 2%;
+    width: 400px;
+}
+
+.Header {
+    margin-bottom: 20px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    color: #433878;
+}
+body{
+    overflow: hidden;
+}
+
+input{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: transparent;
+    color: #797979;
+}

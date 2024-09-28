@@ -1,0 +1,52 @@
+.Read {
+    background-color: #7695FF; /* Background color for the container */
+    color: white; /* Text color for the container */
+}
+
+.user-details {
+    background-color: white; /* Background color for the details section */
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px; /* Padding inside the details section */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for a lifted effect */
+    max-width: 600px; /* Max width for the details section */
+    width: 100%; /* Full width for responsiveness */
+    margin: 20px; /* Margin around the details section */
+}
+
+.list-group-item {
+    border: none; /* Remove borders from list items */
+    padding: 10px 15px; /* Add padding inside list items */
+}
+
+.list-group-item:not(:last-child) {
+    border-bottom: 1px solid #dee2e6; /* Light border between items */
+}
+
+.btn-success {
+    background-color: #28a745; /* Custom green color for the button */
+    border: none; /* Remove border from the button */
+}
+
+.btn-success:hover {
+    background-color: #218838; /* Darker green color on hover */
+}
+
+.text-white {
+    color: white; /* White text color */
+}
+
+.d-flex {
+    display: flex; /* Flexbox layout */
+}
+
+.flex-column {
+    flex-direction: column; /* Arrange children in a column */
+}
+
+.align-items-center {
+    align-items: center; /* Center items horizontally */
+}
+
+.justify-content-center {
+    justify-content: center; /* Center items vertically */
+}

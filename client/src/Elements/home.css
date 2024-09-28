@@ -1,0 +1,38 @@
+.Home {
+    background-color: #9DBDFF; /* Light background color for the whole page */
+    padding: 20px;
+}
+
+.table {
+    margin: 0 auto; /* Center the table horizontally */
+    max-width: 100%; /* Ensure table does not overflow */
+    background-color: white; /* Table background color */
+    border-radius: 8px; /* Rounded corners for the table */
+    overflow: hidden; /* Clip off the corners of the table */
+}
+
+.table thead {
+    background-color: #343a40; /* Dark background for the table header */
+    color: white; /* White text color for the header */
+}
+
+.table th, .table td {
+    text-align: center; /* Center text in table cells */
+    vertical-align: middle; /* Vertically center text */
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f2f2f2; /* Alternating row colors for readability */
+}
+
+.table-bordered {
+    border: 1px solid #dee2e6; /* Light border for the table */
+}
+
+.table-responsive {
+    overflow-x: auto; /* Enable horizontal scroll if table is too wide */
+}
+
+.btn-info, .btn-warning, .btn-danger {
+    margin: 0 2px; /* Space buttons slightly apart */
+}

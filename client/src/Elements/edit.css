@@ -1,0 +1,63 @@
+.Edit {
+    background-color: #7695FF; /* Background color for the container */
+    color: black; /* Text color for the container */
+}
+
+.user-form {
+    background-color: white; /* Background color for the form */
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px; /* Padding inside the form */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for a lifted effect */
+    max-width: 600px; /* Max width for the form */
+    width: 100%; /* Full width for responsiveness */
+    margin: 20px; /* Margin around the form */
+}
+
+.form-group {
+    margin-bottom: 1.5rem; /* Space between form elements */
+}
+
+.form-group label {
+    display: block; /* Block display for labels */
+    margin-bottom: 0.5rem; /* Space below labels */
+}
+
+.form-group input {
+    width: 100%; /* Full width for inputs */
+    padding: 0.5rem; /* Padding inside inputs */
+    border: 1px solid #ced4da; /* Border color for inputs */
+    border-radius: 4px; /* Rounded corners for inputs */
+}
+
+.btn-success {
+    background-color: #28a745; /* Green background color */
+    border: none; /* Remove border */
+}
+
+.btn-success:hover {
+    background-color: #218838; /* Darker green color on hover */
+}
+
+.text-white {
+    color: white; /* White text color */
+}
+
+.d-flex {
+    display: flex; /* Flexbox layout */
+}
+
+.flex-column {
+    flex-direction: column; /* Arrange children in a column */
+}
+
+.align-items-center {
+    align-items: center; /* Center items horizontally */
+}
+
+.justify-content-center {
+    justify-content: center; /* Center items vertically */
+}
+
+.mb-4 {
+    margin-bottom: 1.5rem; /* Bottom margin for spacing */
+}
