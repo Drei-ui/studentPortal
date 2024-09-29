@@ -31,14 +31,13 @@ function Home() {
       {/* Topbar */}
       <div className="topbar">
         <h3 className="text-center mb-4">Student Portal</h3>
+        <div className="topbar-links">
+          <Link className="btn btn-success" to="/create">Add Student</Link>
+          <Link className="btn btn-secondary" to="/">Logout</Link>
+        </div>
       </div>
 
       {/* Main Content */}
-      <div className="d-flex justify-content-end mb-3 gap-1 pt-3">
-        <Link className="btn btn-success" to="/create">Add Student</Link>
-        <Link className="btn btn-secondary" to="/">Logout</Link>
-      </div>
-
       <div className="table-responsive">
         <table className="table table-striped table-bordered">
           <thead className="thead-dark">

@@ -32,7 +32,7 @@ function Edit() {
   return (
     <div className="container-fluid vw-100 vh-100 d-flex flex-column align-items-center justify-content-center Edit">
             <h1 className="text-white mb-4">User {id}</h1>
-            <Link to="/" className="btn btn-success mb-4">Back</Link>
+            <Link to="/home" className="btn btn-success mb-4">Back</Link>
             {data.map((student) => (
                 <form onSubmit={handleSubmit} className="user-form">
                     <div className="form-group my-3">

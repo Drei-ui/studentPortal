@@ -29,7 +29,7 @@ function Create() {
             <div className='row'>
                 <h3 className='text-center mb-4'>Add Student</h3>
                 <div className='d-flex justify-content-end mb-3'>
-                    <Link to='/' className='btn btn-success'>Home</Link>
+                    <Link to='/home' className='btn btn-success'>Home</Link>
                 </div>
                 <form onSubmit={handleSubmit} className='table-form'>
                     <div className='form-group row'>
