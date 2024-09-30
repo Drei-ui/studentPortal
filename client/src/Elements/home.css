@@ -1,10 +1,15 @@
 .Home {
-    background-color: #9DBDFF; /* Light background color for the whole page */
+    background-image: linear-gradient(to bottom,#1E3E62, #433878); /* Light background color for the whole page */
     margin-top: 60px;
+   
+}
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Prevent horizontal overflow */
+    overflow-y: hidden;
 }
 
-/* Topbar styling */
-/* Topbar styling */
 .topbar {
     width: 100%;
     height: 60px;
@@ -76,9 +81,22 @@
 
 .btn-info, .btn-warning, .btn-danger {
     margin: 0 2px; /* Space buttons slightly apart */
+    background-color: #232D3F;
+    color: white;
+    border-color: #232D3F;
 }
 
 .btn-secondary{
     background-color: #433878 !important;
 }
 
+.search-container {
+    justify-content: start; /* Aligns the search bar to the right */
+    padding: 10px;
+  }
+  
+  .search-bar {
+    width: 250px; /* Adjust the width as per your need */
+  }
+  
+  

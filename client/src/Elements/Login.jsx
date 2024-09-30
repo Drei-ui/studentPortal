@@ -34,63 +34,65 @@ const Login = () => {
   };
 
   return (
-    <div className='container'>
-      <div className='Header'>
-        <h2>{isLogin ? 'Login' : 'Sign Up'}</h2>
-      </div>
-      <div className="details">
-        <form onSubmit={isLogin ? handleLogin : handleSignup}>
-          <div className="form-group">
-            <input
-              type="text"
-              placeholder='Username'
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
-          </div>
-          
-          {!isLogin && (
+    <div className='outer-container'>
+      <div className='container'>
+        <div className='Header'>
+          <h2>{isLogin ? 'Login' : 'Sign Up'}</h2>
+        </div>
+        <div className="details">
+          <form onSubmit={isLogin ? handleLogin : handleSignup}>
             <div className="form-group">
               <input
-                type="email"
-                placeholder='Email'
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                type="text"
+                placeholder='Username'
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
                 required
               />
             </div>
-          )}
+            
+            {!isLogin && (
+              <div className="form-group">
+                <input
+                  type="email"
+                  placeholder='Email'
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
+            )}
 
-          <div className="form-group">
-            <input
-              type="password"
-              placeholder='Password'
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-          
-          <div className="buttons">
-            <button type='submit' className='btn btn-dark'>
-              {isLogin ? 'Login' : 'Sign Up'}
+            <div className="form-group">
+              <input
+                type="password"
+                placeholder='Password'
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+            
+            <div className="buttons">
+              <button type='submit' className='btn btn-dark'>
+                {isLogin ? 'Login' : 'Sign Up'}
+              </button>
+            </div>
+          </form>
+
+          {/* Toggle between Login and Sign Up */}
+          <p>
+            {isLogin
+              ? "Don't have an account? "
+              : 'Already have an account? '}
+            <button
+              className="btn btn-link"
+              onClick={() => setIsLogin(!isLogin)}
+            >
+              {isLogin ? 'Sign Up' : 'Login'}
             </button>
-          </div>
-        </form>
-
-        {/* Toggle between Login and Sign Up */}
-        <p>
-          {isLogin
-            ? "Don't have an account? "
-            : 'Already have an account? '}
-          <button
-            className="btn btn-link"
-            onClick={() => setIsLogin(!isLogin)}
-          >
-            {isLogin ? 'Sign Up' : 'Login'}
-          </button>
-        </p>
+          </p>
+        </div>
       </div>
     </div>
   );

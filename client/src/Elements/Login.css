@@ -1,12 +1,22 @@
-.container{
+.outer-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Full viewport height */
+    
+}
+
+.container {
     background-color: white;
     display: flex;
     flex-direction: column;
-    margin-top: 15rem;
+    align-items: center;
+    justify-content: center;
     padding: 2%;
     width: 20vw;
-    height: 45vh;
     border-radius: 10px;
+    min-height: 50vh; /* Container's content height */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional box shadow for better visuals */
 }
 
 .Header {
@@ -16,34 +26,10 @@
     flex-direction: column;
     color: #433878;
 }
-body{
-    overflow: hidden;
-}
 
-.details{
+.details {
     display: flex;
     flex-direction: column;
     gap: 10px;
     background: transparent;
-    
-}
-
-input{
-    display: flex;
-    align-items: center;
-    background: #eaeaea;
-    
-}
-
-
-.buttons{
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-    margin-top: 30px;
-    
-}
-.buttons button{
-    width: 500px;
-    border-radius: 20px;
 }

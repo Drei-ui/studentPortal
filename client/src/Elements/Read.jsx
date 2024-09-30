@@ -17,7 +17,7 @@ function Read() {
   return (
     <div className="Read container-fluid vw-100 vh-100 d-flex flex-column align-items-center justify-content-center ">
             <h1 className="text-white mb-4">User {id}</h1>
-            <Link to="/" className="btn btn-success mb-4">Back</Link>
+            <Link to="/home" className="btn btn-success mb-4">Back</Link>
             <div className="user-details">
                 {data.map((student) => (
                     <ul className="list-group" key={student.id}>
