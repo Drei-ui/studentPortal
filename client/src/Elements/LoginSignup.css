@@ -1,0 +1,79 @@
+/* Outer container covering the entire viewport */
+.outer-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Full viewport height */
+    background: linear-gradient(to bottom, #3A6D8C, #001F3F); /* Light background color for the page */
+}
+
+/* Inner container holding the form and content */
+.container {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2%;
+    width: 20vw;
+    border-radius: 10px;
+    min-height: 50vh; /* Minimum height for the container */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for visuals */
+}
+
+/* Header styling */
+.Header {
+    margin-bottom: 20px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    color: #433878;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Details container for form fields */
+.details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: transparent;
+    width: 100%;
+}
+
+/* Form field styling */
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+/* Button styling */
+.buttons .btn {
+    width: 100%;
+    padding: 10px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.buttons .btn:hover {
+    background-color: #372b6b;
+}
+
+/* Link button for switching between login and signup */
+button.btn-link {
+    background: none;
+    border: none;
+    color: #433878;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+button.btn-link:hover {
+    color: #372b6b;
+}
