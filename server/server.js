@@ -96,16 +96,20 @@ app.post('/signup', (req, res) => {
   check('email', "Invalid email").isEmail().isLength({ min: 10, max: 30 }),
   check('password', "Password must be between 8 and 10 characters").isLength({ min: 8, max: 10 })
 ], (req, res) => {
-  
+
+  console.log("Login route hit");
+  console.log("Querying database with:", req.body.email, req.body.password);
+
   // Check for validation errors
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
       console.log("Validation Errors:", errors.array());
       return res.status(400).json({ errors: errors.array() });
   }
-
+  
   const sql = "SELECT * FROM login WHERE email = ? AND password = ?";
   db.query(sql, [req.body.email, req.body.password], (err, data) => {
+    
       if (err) {
           console.error("Database error:", err);
           return res.status(500).json({ message: "Error querying user", error: err });
@@ -138,6 +142,7 @@ app.post('/login', (req, res) => {
     }
   });
 });
+
 
 app.listen(port, () => {
   console.log(`listening on port ${port} `);
