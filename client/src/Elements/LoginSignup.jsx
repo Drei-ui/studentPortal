@@ -42,7 +42,7 @@ const LoginSignup = () => {
                     setBackendError(res.data.errors);
                 } else {
                     setBackendError([]);
-                    if (res.data === "Success") {
+                    if (res.data.message === "Success") {
                         navigate('/home');
                     } else {
                         alert("Invalid login credentials");     

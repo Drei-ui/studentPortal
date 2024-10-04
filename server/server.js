@@ -92,9 +92,9 @@ app.post('/signup', (req, res) => {
 });
 
 // Login Route
-/* app.post('/login', [
-  check('email', "Invalid email").isEmail().isLength({ min: 10, max: 30 }),
-  check('password', "Password must be between 8 and 10 characters").isLength({ min: 8, max: 10 })
+app.post('/login', [
+  check('email', "Invalid email").isEmail().isLength({ min: 10}),
+  check('password', "Password must be between 8 and 10 characters").isLength({ min: 8})
 ], (req, res) => {
 
   console.log("Login route hit");
@@ -122,9 +122,9 @@ app.post('/signup', (req, res) => {
           return res.status(401).json({ message: "Failed", error: "Invalid credentials" });
       }
   });
-}); */
+});
 
-app.post('/login', (req, res) => {
+/* app.post('/login', (req, res) => {
   console.log("Email:", req.body.email);
   console.log("Password:", req.body.password);
 
@@ -136,13 +136,19 @@ app.post('/login', (req, res) => {
     }
 
     if (data.length > 0) {
-      return res.json("Success"); // Login successful
+      if (req.body.password === data[0].password) {
+        return res.json({message: "Success", user: data[0]}); // Login successful
+      } else {
+        console.log("Invalid credentials");
+        return res.status(401).json("Invalid credentials"); // Login failed
+      }
     } else {
-      return res.status(401).json("Invalid credentials"); // Login failed
+      console.log("User not found");
+      return res.status(401).json("User not found"); // User not found
     }
   });
 });
-
+ */
 
 app.listen(port, () => {
   console.log(`listening on port ${port} `);
