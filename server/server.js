@@ -2,12 +2,14 @@ const express = require("express");
 const mysql = require("mysql");
 const cors = require("cors");
 const path = require("path");
+const multer = require("multer");
 const app = express();
 const { check, validationResult } = require('express-validator');
 //path.resolve()
 app.use(express.static(path.join(__dirname, "public")));
 app.use(cors());
 app.use(express.json());
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 const port = 5000;
 const db = mysql.createConnection({
@@ -17,6 +19,15 @@ const db = mysql.createConnection({
   database: "students",
 });
 
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, './uploads'); // Ensure this directory exists
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + '-' + file.originalname);
+  }
+});
+const upload = multer({ storage: storage });
 
 app.post("/add_user", (req, res) => {
   const sql =
@@ -116,39 +127,34 @@ app.post('/login', [
       }
 
       if (data.length > 0) {
-          return res.status(200).json({ message: "Success", user: data[0] });
+          if (req.body.password === data[0].password) {
+              return res.status(200).json({ message: "Success", user: data[0] });
+          } else {
+              console.log("Incorrect password");
+              return res.status(401).json({ message: "Failed", error: "Invalid credentials" });
+          }
       } else {
-          console.log("No user found or incorrect password");
-          return res.status(401).json({ message: "Failed", error: "Invalid credentials" });
+          console.log("No user found");
+          return res.status(401).json({ message: "Failed", error: "User not found" });
       }
   });
 });
 
-/* app.post('/login', (req, res) => {
-  console.log("Email:", req.body.email);
-  console.log("Password:", req.body.password);
-
-  const sql = "SELECT * FROM login WHERE email = ? AND password = ?";
-  db.query(sql, [req.body.email, req.body.password], (err, data) => {
+// Route to upload an image
+app.post('/upload_picture/:id', upload.single('picture'), (req, res) => {
+  const id = req.params.id;
+  const picturePath = req.file.path;
+  const sql = "UPDATE student_details SET image = ? WHERE id = ?";
+  db.query(sql, [picturePath, id], (err, result) => {
     if (err) {
-      console.error("Database error:", err);
-      return res.status(500).json("Error");
+      console.error("Error uploading picture:", err);
+      return res.status(500).json({ message: "Error uploading picture", error: err });
     }
-
-    if (data.length > 0) {
-      if (req.body.password === data[0].password) {
-        return res.json({message: "Success", user: data[0]}); // Login successful
-      } else {
-        console.log("Invalid credentials");
-        return res.status(401).json("Invalid credentials"); // Login failed
-      }
-    } else {
-      console.log("User not found");
-      return res.status(401).json("User not found"); // User not found
-    }
+    return res.status(200).json({ message: "Picture uploaded successfully" });
   });
 });
- */
+
+
 
 app.listen(port, () => {
   console.log(`listening on port ${port} `);

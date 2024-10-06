@@ -6,6 +6,7 @@ import './edit.css'
 function Edit() {
   const [data, setData] = useState([]);
   const { id } = useParams();
+  const navigate = useNavigate();
   useEffect(() => {
     axios
       .get(`/get_student/${id}`)
@@ -15,7 +16,7 @@ function Edit() {
       .catch((err) => console.log(err));
   }, [id]);
 
-  const navigate = useNavigate();
+  
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -23,23 +24,45 @@ function Edit() {
     axios
       .post(`/edit_user/${id}`, data[0])
       .then((res) => {
-        navigate("/");
+        navigate("/home");
         console.log(res);
       })
       .catch((err) => console.log(err));
   }
 
+  function handlePictureUpload(e) {
+    const formData = new FormData();
+    formData.append('picture', e.target.files[0]);
+
+    axios
+    .post(`/upload_picture/${id}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+    .then((res) => {
+      console.log(res.data);
+    })
+    .catch((err) => console.log(err));
+  }
   return (
     <div className="container-fluid vw-100 vh-100 d-flex flex-column align-items-center justify-content-center Edit">
-            <h1 className="text-white mb-4">User {id}</h1>
             <Link to="/home" className="btn btn-success mb-4">Back</Link>
-            {data.map((student) => (
+            {data.map((student) => (   
                 <form onSubmit={handleSubmit} className="user-form">
                     <div className="form-group my-3">
-                        <label htmlFor="name">Name</label>
+                        <label htmlFor="email">Upload Picture</label>
+                        <input
+                            type="file"
+                            name="picture"
+                            onChange={handlePictureUpload}
+                        />
+                    </div>
+                    <div className="form-group my-3">
+                        <label htmlFor="email">Name</label>
                         <input
                             value={student.name}
-                            type="text"
+                            type="name"
                             name="name"
                             required
                             onChange={(e) => setData([{ ...data[0], name: e.target.value }])}
@@ -83,5 +106,4 @@ function Edit() {
         </div>
   );
 }
-
 export default Edit;

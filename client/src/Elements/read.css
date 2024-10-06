@@ -1,5 +1,5 @@
 .Read {
-    background-color: #7695FF; /* Background color for the container */
+    background-image: linear-gradient(to bottom,#1E3E62, #433878); /* Background color for the container */
     color: white; /* Text color for the container */
 }
 
@@ -49,4 +49,9 @@
 
 .justify-content-center {
     justify-content: center; /* Center items vertically */
+}
+
+.image-container{
+    display: flex;
+    justify-content: center;
 }

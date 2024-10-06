@@ -1,5 +1,5 @@
 .Edit {
-    background-color: #7695FF; /* Background color for the container */
+    background-image: linear-gradient(to bottom,#1E3E62, #433878); /* Background color for the container */
     color: black; /* Text color for the container */
 }
 
@@ -61,3 +61,4 @@
 .mb-4 {
     margin-bottom: 1.5rem; /* Bottom margin for spacing */
 }
+
