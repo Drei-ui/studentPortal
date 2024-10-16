@@ -4,8 +4,6 @@ Simple search functionality and basic filter options (name, ID, email) are strai
 Student Profile Page
 Creating a basic profile page involves rendering existing student data with potential for more detailed views. Adding an upload feature for profile pictures can be done using file handling and storage.
 
-Role-Based Access Control
-Implementing role-based access involves managing permissions for admins, teachers, and students, which is manageable with user roles and permissions logic.
 
 Student Grades Management
 Viewing grades is easy, but adding grades requires creating forms, database updates, and data validation, making it a bit more complex.
@@ -22,8 +20,7 @@ Real-time notifications and email/SMS alerts require backend event triggers and 
 Assignment Submission
 Adding file upload functionality for assignment submission involves more complex file handling and storage management, plus teacher feedback features.
 
-Message Center
-Creating a messaging system requires real-time communication handling, message storage, and UI for easy user interaction.
+
 
 Reports and Analytics
 Performance reports and dashboard analytics require aggregation of student data, visual representation, and exporting capabilities.
