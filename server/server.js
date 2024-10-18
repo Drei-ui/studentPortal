@@ -3,6 +3,7 @@ const mysql = require("mysql");
 const cors = require("cors");
 const path = require("path");
 const multer = require("multer");
+const bcrypt = require("bcrypt");
 const app = express();
 const { check, validationResult } = require('express-validator');
 //path.resolve()
@@ -86,57 +87,73 @@ app.delete("/delete/:id", (req, res) => {
   });
 });
 
-app.post('/signup', (req, res) => {
-  const sql = "INSERT INTO login (name, email, password) VALUES (?)";
-  const values = [
+app.post('/signup', async (req, res) => {
+  try {
+    // Hash the password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(req.body.password, salt);
+
+    const sql = "INSERT INTO login (name, email, password) VALUES (?)";
+    const values = [
       req.body.name,
       req.body.email,
-      req.body.password
-  ];
+      hashedPassword  // Store the hashed password
+    ];
 
-  db.query(sql, [values], (err, data) => {
+    db.query(sql, [values], (err, data) => {
       if (err) {
-          return res.status(500).json({ message: "Error inserting user", error: err });
+        return res.status(500).json({ message: "Error inserting user", error: err });
       }
       return res.status(201).json({ message: "User created successfully", data });
-  });
+    });
+  } catch (error) {
+    console.error("Error in signup:", error);
+    return res.status(500).json({ message: "Server error during signup", error: error.message });
+  }
 });
 
 // Login Route
 app.post('/login', [
   check('email', "Invalid email").isEmail().isLength({ min: 10}),
   check('password', "Password must be between 8 and 10 characters").isLength({ min: 8})
-], (req, res) => {
-
+], async (req, res) => {
   console.log("Login route hit");
-  console.log("Querying database with:", req.body.email, req.body.password);
+  console.log("Querying database with:", req.body.email);
 
   // Check for validation errors
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-      console.log("Validation Errors:", errors.array());
-      return res.status(400).json({ errors: errors.array() });
+    console.log("Validation Errors:", errors.array());
+    return res.status(400).json({ errors: errors.array() });
   }
   
-  const sql = "SELECT * FROM login WHERE email = ? AND password = ?";
-  db.query(sql, [req.body.email, req.body.password], (err, data) => {
-    
-      if (err) {
-          console.error("Database error:", err);
-          return res.status(500).json({ message: "Error querying user", error: err });
-      }
+  const sql = "SELECT * FROM login WHERE email = ?";
+  db.query(sql, [req.body.email], async (err, data) => {
+    if (err) {
+      console.error("Database error:", err);
+      return res.status(500).json({ message: "Error querying user", error: err });
+    }
 
-      if (data.length > 0) {
-          if (req.body.password === data[0].password) {
-              return res.status(200).json({ message: "Success", user: data[0] });
-          } else {
-              console.log("Incorrect password");
-              return res.status(401).json({ message: "Failed", error: "Invalid credentials" });
-          }
-      } else {
-          console.log("No user found");
-          return res.status(401).json({ message: "Failed", error: "User not found" });
+    if (data.length > 0) {
+      console.log("User found, stored hash:", data[0].password);
+      try {
+        // Compare the provided password with the stored hash
+        const isMatch = await bcrypt.compare(req.body.password, data[0].password);
+        console.log("Password match result:", isMatch);
+        if (isMatch) {
+          return res.status(200).json({ message: "Success", user: { id: data[0].id, name: data[0].name, email: data[0].email } });
+        } else {
+          console.log("Incorrect password");
+          return res.status(401).json({ message: "Failed", error: "Invalid credentials" });
+        }
+      } catch (error) {
+        console.error("Error comparing passwords:", error);
+        return res.status(500).json({ message: "Error during password comparison", error: error.message });
       }
+    } else {
+      console.log("No user found");
+      return res.status(401).json({ message: "Failed", error: "User not found" });
+    }
   });
 });
 
