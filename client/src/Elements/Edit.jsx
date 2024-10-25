@@ -5,6 +5,12 @@ import './edit.css'
 
 function Edit() {
   const [data, setData] = useState([]);
+  const [grades, setGrades] = useState({
+    math_grade: '',
+    science: '',
+    programming: '',
+    dsa_grade: '',
+  })
   const { id } = useParams();
   const navigate = useNavigate();
   useEffect(() => {
@@ -12,6 +18,16 @@ function Edit() {
       .get(`/get_student/${id}`)
       .then((res) => {
         setData(res.data);
+
+      const student = res.data[0];
+      if(student){
+        setGrades({
+          math_grade: student.math_grade || null,
+          science: student.science_grade || null,
+          programming: student.programming_grade || null,
+          dsa: student.dsa_grade || null,
+        })
+      }
       })
       .catch((err) => console.log(err));
   }, [id]);
@@ -21,13 +37,34 @@ function Edit() {
   function handleSubmit(e) {
     e.preventDefault();
 
+    const subject = data[0].subject;
+
+    if(!subject){
+      console.error("Subject is undefined");
+      return;
+    }
+    const updatedValues = {
+      name: data[0].name,
+      email: data[0].email,
+      age: data[0].age,
+      gender: data[0].gender,
+      ...grades
+    };
+
     axios
-      .post(`/edit_user/${id}`, data[0])
+      .post(`/edit_user/${id}`, updatedValues)
       .then((res) => {
         navigate("/home");
         console.log(res);
       })
       .catch((err) => console.log(err));
+  }
+
+  const handleGradeChange = (subject, value) =>{
+    setGrades(prevGrades => ({
+      ...prevGrades,
+      [`${subject.toLowerCase()}_grade`]:value
+    }))
   }
 
   function handlePictureUpload(e) {
@@ -47,9 +84,9 @@ function Edit() {
   }
   return (
     <div className="container-fluid vw-100 vh-100 d-flex flex-column align-items-center justify-content-center Edit">
-            <Link to="/home" className="btn btn-success mb-4">Back</Link>
             {data.map((student) => (   
                 <form onSubmit={handleSubmit} className="user-form">
+                  <Link to="/home" className="btn btn-success mb-4">Back</Link>
                     <div className="form-group my-3">
                         <label htmlFor="email">Upload Picture</label>
                         <input
@@ -97,6 +134,35 @@ function Edit() {
                             required
                             onChange={(e) => setData([{ ...data[0], age: e.target.value }])}
                         />
+                    </div>
+                    <div className="form-group my-3 d-flex align-items-center">
+                        <div className="flex-fill me-2">
+                            <label htmlFor="subject">Select Subject</label>
+                            <select
+                                name="subject"
+                                className="form-control"
+                                onChange={(e) => setData([{ ...data[0], subject: e.target.value }])}
+                                value={student.subject || ''}
+                            >
+                                <option value="">Select a subject</option>
+                                <option value="Math">Math</option>
+                                <option value="Science">Science</option>
+                                <option value="Programming">Programming</option>
+                                <option value="DSA">Data Structures and Algorithms</option>
+                            </select>
+                        </div>
+                        <div className="flex-fill">
+                            <label htmlFor="grade">Enter Grade</label>
+                            <input
+                                type="number"
+                                name="grade"
+                                placeholder="Grade"
+                                required
+                                onChange={(e) => handleGradeChange(student.subject, e.target.value)}
+                                value={grades[`${student.subject?.toLowerCase()}_grade`] || ''}
+                                min="0" 
+                            />
+                        </div>
                     </div>
                     <div className="form-group my-3">
                         <button type="submit" className="btn btn-success">Save</button>

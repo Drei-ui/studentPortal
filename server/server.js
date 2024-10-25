@@ -61,12 +61,16 @@ app.get("/get_student/:id", (req, res) => {
 app.post("/edit_user/:id", (req, res) => {
   const id = req.params.id;
   const sql =
-    "UPDATE student_details SET `name`=?, `email`=?, `age`=?, `gender`=? WHERE id=?";
+    "UPDATE student_details SET `name`=?, `email`=?, `age`=?, `gender`=?, `math_grade`=?,`science_grade`=?,`programming_grade`=?,`dsa_grade`=? WHERE id=?";
   const values = [
     req.body.name,
     req.body.email,
     req.body.age,
     req.body.gender,
+    req.body.math_grade || null,
+    req.body.science_grade || null,
+    req.body.programming_grade || null,
+    req.body.dsa_grade || null,
     id,
   ];
   db.query(sql, values, (err, result) => {
